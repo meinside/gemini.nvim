@@ -68,6 +68,7 @@ then it will generate a text from both the selected text and prompt, and replace
 
 ## Todos / Improvements
 
+- [ ] Add screen recordings for each usage
 - [ ] Handle multiple number of candidates and content parts.
 - [ ] Add nice UIs for comparing & applying generated texts.
 
