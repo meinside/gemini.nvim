@@ -74,7 +74,8 @@ then it will generate a text from both the selected text and prompt, and replace
 
 ## Todos / Improvements
 
-- [X] Add screen recordings for each usage
+- [X] Add screen recordings for each usage.
+- [ ] Strip unwanted markdown codeblock around the generated texts.
 - [ ] Handle multiple number of candidates and content parts.
 - [ ] Add nice UIs for comparing & applying generated texts.
 
