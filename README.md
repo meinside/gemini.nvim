@@ -38,6 +38,8 @@ and create a config file at path `configFilepath` with following content:
 
 ### Insert Generated Text At Current Cursor Position
 
+![gemini-nvim insert-with-prompt](https://github.com/meinside/gemini.nvim/assets/185988/f0575fe1-b40d-4962-9cec-f22818635767)
+
 Run following command with a prompt:
 
 ```
@@ -47,6 +49,8 @@ Run following command with a prompt:
 It will generate a text from your prompt and insert it at the current cursor position.
 
 ### Generate Text With Selected Range As A Prompt
+
+![gemini-nvim replace](https://github.com/meinside/gemini.nvim/assets/185988/aeb5aee1-0078-4407-9acd-e9628b519420)
 
 Select a range of text with visual block, and run following command:
 
@@ -58,6 +62,8 @@ then it will generate a text from the selected text as a prompt, and replace the
 
 ### Replace Selected Range With Generated Text
 
+![gemini-nvim replace-with-prompt](https://github.com/meinside/gemini.nvim/assets/185988/831aa4f2-cfb9-4253-8cf6-e585b7617284)
+
 Select a range of text with visual block, and run following command with a prompt:
 
 ```
@@ -68,7 +74,7 @@ then it will generate a text from both the selected text and prompt, and replace
 
 ## Todos / Improvements
 
-- [ ] Add screen recordings for each usage
+- [X] Add screen recordings for each usage
 - [ ] Handle multiple number of candidates and content parts.
 - [ ] Add nice UIs for comparing & applying generated texts.
 
