@@ -14,7 +14,9 @@ A neovim plugin for generating texts using Google [Gemini APIs](https://ai.googl
         -- (default values)
         configFilepath = '~/.config/gemini.nvim/config.json',
         timeout = 30 * 1000,
-        stripOutermostCodeblock = true,
+        stripOutermostCodeblock = function()
+          return vim.bo.filetype ~= 'markdown'
+        end,
         verbose = false,
       }
     end,

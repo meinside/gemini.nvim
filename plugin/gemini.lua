@@ -48,7 +48,7 @@ vim.api.nvim_create_user_command(
           error(err)
         else
           -- strip outermost codeblock
-          if config.options.stripOutermostCodeblock then
+          if config.options.stripOutermostCodeblock() then
             for i, _ in ipairs(parts) do
               parts[i] = util.strip_outermost_codeblock(parts[i])
             end
@@ -83,7 +83,7 @@ vim.api.nvim_create_user_command(
         error(err)
       else
         -- strip outermost codeblock
-        if config.options.stripOutermostCodeblock then
+        if config.options.stripOutermostCodeblock() then
           for i, _ in ipairs(parts) do
             parts[i] = util.strip_outermost_codeblock(parts[i])
           end
