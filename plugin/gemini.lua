@@ -47,8 +47,16 @@ vim.api.nvim_create_user_command(
         if err ~= nil then
           error(err)
         else
+          -- strip outermost codeblock
+          if config.options.stripOutermostCodeblock then
+            for i, _ in ipairs(parts) do
+              parts[i] = util.strip_outermost_codeblock(parts[i])
+            end
+          end
+          local generated = util.join(parts, '\n\n')
+
           -- and insert the generated content
-          ui.insert_text_at_current_cursor(util.join(parts, '\n\n'))
+          ui.insert_text_at_current_cursor(generated)
         end
       else
         warn('No prompt was given.')
@@ -74,8 +82,16 @@ vim.api.nvim_create_user_command(
       if err ~= nil then
         error(err)
       else
+        -- strip outermost codeblock
+        if config.options.stripOutermostCodeblock then
+          for i, _ in ipairs(parts) do
+            parts[i] = util.strip_outermost_codeblock(parts[i])
+          end
+        end
+        local generated = util.join(parts, '\n\n')
+
         -- and replace the selected range with generated content
-        ui.replace_text(start_row, start_col, end_row, end_col, util.join(parts, '\n\n'))
+        ui.replace_text(start_row, start_col, end_row, end_col, generated)
       end
     end
   end,

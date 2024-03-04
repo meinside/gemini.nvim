@@ -14,6 +14,7 @@ A neovim plugin for generating texts using Google [Gemini APIs](https://ai.googl
         -- (default values)
         configFilepath = '~/.config/gemini.nvim/config.json',
         timeout = 30 * 1000,
+        stripOutermostCodeblock = true,
         verbose = false,
       }
     end,
@@ -26,7 +27,7 @@ A neovim plugin for generating texts using Google [Gemini APIs](https://ai.googl
 
 Get your API key from [here](https://makersuite.google.com/app/apikey)
 
-and create a config file at path `configFilepath` with following content:
+and create a JSON config file at path `configFilepath` with following content:
 
 ```json
 {
@@ -75,7 +76,7 @@ then it will generate a text from both the selected text and prompt, and replace
 ## Todos / Improvements
 
 - [X] Add screen recordings for each usage.
-- [ ] Strip unwanted markdown codeblock around the generated texts.
+- [X] Strip unwanted markdown codeblock around the generated texts.
 - [ ] Handle multiple number of candidates and content parts.
 - [ ] Add nice UIs for comparing & applying generated texts.
 
