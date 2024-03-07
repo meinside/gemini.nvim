@@ -8,7 +8,7 @@ local M = {
   -- constants
   defaultConfigFilepath = '~/.config/gemini.nvim/config.json',
   defaultTimeoutMsecs = 30 * 1000,
-  defaultSafetyThreshold = 'BLOCK_NONE',
+  defaultSafetyThreshold = 'BLOCK_ONLY_HIGH',
   defaultStripOutermostCodeblock = function()
     -- don't strip codeblock markdowns in markdown files
     return vim.bo.filetype ~= 'markdown'
