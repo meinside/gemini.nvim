@@ -14,6 +14,7 @@ A neovim plugin for generating texts using Google [Gemini APIs](https://ai.googl
         -- (default values)
         configFilepath = '~/.config/gemini.nvim/config.json',
         timeout = 30 * 1000,
+        safetyThreshold = 'BLOCK_NONE',
         stripOutermostCodeblock = function()
           return vim.bo.filetype ~= 'markdown'
         end,
@@ -79,6 +80,7 @@ then it will generate a text from both the selected text and prompt, and replace
 
 - [X] Add screen recordings for each usage.
 - [X] Strip unwanted markdown codeblock around the generated texts.
+- [X] Add an option for setting safety threshold.
 - [ ] Handle multiple number of candidates and content parts.
 - [ ] Add nice UIs for comparing & applying generated texts.
 
