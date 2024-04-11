@@ -1,6 +1,6 @@
 -- lua/gemini.lua
 --
--- last update: 2024.02.27.
+-- last update: 2024.04.11.
 
 -- plugin modules
 local config = require'gemini/config'

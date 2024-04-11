@@ -2,7 +2,7 @@
 --
 -- Network module
 --
--- last update: 2024.03.07.
+-- last update: 2024.04.11.
 
 -- external dependencies
 local curl = require'plenary/curl'
@@ -12,7 +12,6 @@ local fs = require'gemini/fs'
 local config = require'gemini/config'
 
 -- constants
-local model = 'gemini-pro'
 local contentType = 'application/json'
 local baseurl = 'https://generativelanguage.googleapis.com'
 
@@ -44,7 +43,7 @@ function M.request_content_generation(prompts)
     return nil, err
   end
 
-  local endpoint = '/v1beta/models/' .. model .. ':generateContent'
+  local endpoint = '/v1beta/models/' .. config.options.model .. ':generateContent'
   local params = {
     contents = {
       { role = 'user', parts = {} }
@@ -53,6 +52,10 @@ function M.request_content_generation(prompts)
   }
   for i, _ in ipairs(prompts) do
     params.contents[1].parts[i] = { text = prompts[i] }
+  end
+
+  if config.options.verbose then
+    vim.notify('requesting to endpoint: ' .. endpoint)
   end
 
   local res = curl.post(request_url(endpoint, apiKey), {
