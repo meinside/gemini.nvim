@@ -2,12 +2,13 @@
 --
 -- Configuration module
 --
--- last update: 2024.03.07.
+-- last update: 2024.04.11.
 
 local M = {
   -- constants
   defaultConfigFilepath = '~/.config/gemini.nvim/config.json',
   defaultTimeoutMsecs = 30 * 1000,
+  defaultModel = 'gemini-1.0-pro',
   defaultSafetyThreshold = 'BLOCK_ONLY_HIGH',
   defaultStripOutermostCodeblock = function()
     -- don't strip codeblock markdowns in markdown files
@@ -19,6 +20,7 @@ local M = {
 M.options = {
   configFilepath = M.defaultConfigFilepath,
   timeout = M.defaultTimeoutMsecs,
+  model = M.defaultModel,
   safetyThreshold = M.defaultSafetyThreshold,
   stripOutermostCodeblock = M.defaultStripOutermostCodeblock,
 
