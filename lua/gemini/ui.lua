@@ -2,7 +2,7 @@
 --
 -- UI module
 --
--- last update: 2024.02.28.
+-- last update: 2024.07.10.
 
 -- plugin modules
 local util = require'gemini/util'
@@ -41,10 +41,21 @@ function M.replace_text(start_row, start_col, end_row, end_col, text)
   vim.api.nvim_buf_set_text(0, start_row - 1, start_col, start_row - 1, start_col, { unpack(util.split(text, '\n')) })
 end
 
+-- clear and replace whole text
+function M.replace_whole_text(lines)
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end
+
 -- insert given text at current cursor position
 function M.insert_text_at_current_cursor(text)
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { unpack(util.split(text, '\n')) })
+end
+
+-- retrieve whole lines from the buffer
+function M.whole_buffer_lines()
+  local content = vim.api.nvim_buf_get_lines(0, 0, vim.api.nvim_buf_line_count(0), false)
+  return table.concat(content, '\n')
 end
 
 return M

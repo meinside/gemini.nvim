@@ -2,7 +2,7 @@
 --
 -- Utility functions module
 --
--- last update: 2024.03.04.
+-- last update: 2024.07.10.
 
 local M = {}
 
@@ -45,6 +45,11 @@ function M.subslice(array, start_index, end_index)
     sub_array[#sub_array + 1] = array[i]
   end
   return sub_array
+end
+
+-- remove comments (#) from given text
+function M.remove_comments(text)
+  return text:gsub("#[^\n]*\n", "\n"):gsub("#[^\n]*$", "")
 end
 
 -- strips outermost codeblock markdown off from given string
