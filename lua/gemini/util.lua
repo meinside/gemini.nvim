@@ -47,9 +47,29 @@ function M.subslice(array, start_index, end_index)
   return sub_array
 end
 
+-- split each line with '\n'
+function M.split_lines(original)
+  local lines = {}
+  for i, _ in ipairs(original) do
+    local splitted = M.split(original[i], '\n')
+    for j, _ in  ipairs(splitted) do
+      table.insert(lines, splitted[j])
+    end
+  end
+  return lines
+end
+
 -- remove comments (#) from given text
 function M.remove_comments(text)
   return text:gsub("#[^\n]*\n", "\n"):gsub("#[^\n]*$", "")
+end
+
+-- if the second line is not empty, insert one
+function M.insert_empty_line_after_first(lines)
+  if #lines >= 2 and lines[2] ~= '' then
+    table.insert(lines, 2, '')
+  end
+  return lines
 end
 
 -- strips outermost codeblock markdown off from given string
@@ -58,7 +78,6 @@ function M.strip_outermost_codeblock(str)
   if #lines >= 2 and M.has_prefix(lines[1], '```') and lines[#lines] == '```' then
     return M.join(M.subslice(lines, 2, #lines - 1), '\n')
   end
-
   return str
 end
 
