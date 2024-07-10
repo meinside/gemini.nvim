@@ -53,10 +53,12 @@ vim.api.nvim_create_user_command(
               parts[i] = util.strip_outermost_codeblock(parts[i])
             end
           end
-          local generated = util.join(parts, '\n\n')
+
+          -- split lines
+          local lines = util.split_lines(parts)
 
           -- and insert the generated content
-          ui.insert_text_at_current_cursor(generated)
+          ui.insert_text_at_current_cursor(lines)
         end
       else
         warn('No prompt was given.')
@@ -88,10 +90,12 @@ vim.api.nvim_create_user_command(
             parts[i] = util.strip_outermost_codeblock(parts[i])
           end
         end
-        local generated = util.join(parts, '\n\n')
+
+        -- split lines
+        local lines = util.split_lines(parts)
 
         -- and replace the selected range with generated content
-        ui.replace_text(start_row, start_col, end_row, end_col, generated)
+        ui.replace_text(start_row, start_col, end_row, end_col, lines)
       end
     end
   end,
@@ -123,20 +127,11 @@ vim.api.nvim_create_user_command(
       if err ~= nil then
         error(err)
       else
-        -- strip outermost codeblock
-        if config.options.stripOutermostCodeblock() then
-          for i, _ in ipairs(parts) do
-            parts[i] = util.strip_outermost_codeblock(parts[i])
-          end
-        end
+        -- split lines
+        local lines = util.split_lines(parts)
 
-        local lines = {}
-        for i, _ in ipairs(parts) do
-          local splitted = util.split(parts[i], '\n')
-          for j, _ in  ipairs(splitted) do
-            table.insert(lines, splitted[j])
-          end
-        end
+        -- FIXME: generated lines have no empty line between the first and the next one
+        lines = util.insert_empty_line_after_first(lines)
 
         -- and replace whole file with the generated content
         ui.replace_whole_text(lines)
@@ -162,16 +157,14 @@ vim.api.nvim_create_user_command(
       if err ~= nil then
         error(err)
       else
-        -- strip outermost codeblock
-        if config.options.stripOutermostCodeblock() then
-          for i, _ in ipairs(parts) do
-            parts[i] = util.strip_outermost_codeblock(parts[i])
-          end
-        end
-        local generated = util.join(parts, '\n\n')
+        -- split lines
+        local lines = util.split_lines(parts)
 
-        -- and replace the selected range with generated content
-        ui.replace_text(start_row, start_col, end_row, end_col, generated)
+        -- FIXME: generated lines have no empty line between the first and the next one
+        lines = util.insert_empty_line_after_first(lines)
+
+        -- merge generated contents and replace the selected range with it
+        ui.replace_text(start_row, start_col, end_row, end_col, lines)
       end
     end
   end,

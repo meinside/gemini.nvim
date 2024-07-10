@@ -36,9 +36,9 @@ function M.get_text(start_row, start_col, end_row, end_col)
 end
 
 -- clear and replace text at given range
-function M.replace_text(start_row, start_col, end_row, end_col, text)
+function M.replace_text(start_row, start_col, end_row, end_col, lines)
   vim.api.nvim_buf_set_text(0, start_row - 1, start_col, end_row - 1, end_col, {})
-  vim.api.nvim_buf_set_text(0, start_row - 1, start_col, start_row - 1, start_col, { unpack(util.split(text, '\n')) })
+  vim.api.nvim_buf_set_text(0, start_row - 1, start_col, start_row - 1, start_col, lines)
 end
 
 -- clear and replace whole text
@@ -47,9 +47,9 @@ function M.replace_whole_text(lines)
 end
 
 -- insert given text at current cursor position
-function M.insert_text_at_current_cursor(text)
+function M.insert_text_at_current_cursor(lines)
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-  vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { unpack(util.split(text, '\n')) })
+  vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, lines)
 end
 
 -- retrieve whole lines from the buffer
