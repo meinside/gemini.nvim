@@ -2,7 +2,7 @@
 --
 -- Network module
 --
--- last update: 2024.04.11.
+-- last update: 2024.07.22.
 
 -- external dependencies
 local curl = require'plenary/curl'
@@ -21,6 +21,25 @@ local function request_url(endpoint, apiKey)
 end
 
 local M = {}
+
+-- generate system instruction
+local function system_instruction(model)
+  return string.format([====[
+You are a neovim plugin for generating things using Google Gemini API(model: %s).
+
+Current datetime is %s.
+
+Respond to user messages according to the following principles:
+- Do not repeat the user's request.
+- Be as accurate as possible.
+- Be as truthful as possible.
+- Be as comprehensive and informative as possible.
+- Be as concise and meaningful as possible.
+- Your response must be in plain text, so do not try to emphasize words with markdown characters.
+]====],
+  model,
+  os.date('%Y-%m-%d %H:%M:%S', os.time()))
+end
 
 -- generate safety settings with given threshold
 --
@@ -45,11 +64,16 @@ function M.request_content_generation(prompts)
 
   local endpoint = '/v1beta/models/' .. config.options.model .. ':generateContent'
   local params = {
-    contents = {
-      { role = 'user', parts = {} }
-    },
+    -- system instruction
+    systemInstruction = { role = 'model', parts = { { text = system_instruction(config.options.model) } } },
+
+    -- contents
+    contents = { { role = 'user', parts = {} } },
+
+    -- safety settings
     safetySettings = safety_settings(config.options.safetyThreshold),
   }
+  -- append prompts to contents
   for i, _ in ipairs(prompts) do
     params.contents[1].parts[i] = { text = prompts[i] }
   end
