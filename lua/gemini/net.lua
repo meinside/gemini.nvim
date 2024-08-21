@@ -2,7 +2,7 @@
 --
 -- Network module
 --
--- last update: 2024.07.22.
+-- last update: 2024.08.21.
 
 -- external dependencies
 local curl = require'plenary/curl'
@@ -34,8 +34,6 @@ Respond to user messages according to the following principles:
 - Be as accurate as possible.
 - Be as truthful as possible.
 - Be as comprehensive and informative as possible.
-- Be as concise and meaningful as possible.
-- Your response must be in plain text, so do not try to emphasize words with markdown characters.
 ]====],
   model,
   os.date('%Y-%m-%d %H:%M:%S', os.time()))
