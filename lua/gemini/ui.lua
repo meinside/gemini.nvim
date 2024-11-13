@@ -2,7 +2,7 @@
 --
 -- UI module
 --
--- last update: 2024.07.10.
+-- last update: 2024.11.13.
 
 -- plugin modules
 local util = require'gemini/util'
@@ -19,26 +19,19 @@ end
 
 -- get text from range
 function M.get_text(start_row, start_col, end_row, end_col)
-  local n_lines = math.abs(end_row - start_row) + 1
-  local lines = vim.api.nvim_buf_get_lines(0, start_row - 1, end_row, false)
-
-  if #lines <= 0 then
-    return nil
+  if start_row == end_row then
+    return vim.api.nvim_buf_get_lines(0, start_row - 1, end_row, false)[1]:sub(start_col, end_col)
   else
-    lines[1] = string.sub(lines[1], start_col, -1)
-    if n_lines == 1 then
-      lines[n_lines] = string.sub(lines[n_lines], 1, end_col - start_col + 1)
-    else
-      lines[n_lines] = string.sub(lines[n_lines], 1, end_col)
-    end
+    local lines = vim.api.nvim_buf_get_lines(0, start_row - 1, end_row, false)
+    lines[1] = lines[1]:sub(start_col)
+    lines[#lines] = lines[#lines]:sub(1, end_col)
     return table.concat(lines, '\n')
   end
 end
 
 -- clear and replace text at given range
 function M.replace_text(start_row, start_col, end_row, end_col, lines)
-  vim.api.nvim_buf_set_text(0, start_row - 1, start_col, end_row - 1, end_col, {})
-  vim.api.nvim_buf_set_text(0, start_row - 1, start_col, start_row - 1, start_col, lines)
+  vim.api.nvim_buf_set_text(0, start_row - 1, start_col, end_row - 1, end_col, lines)
 end
 
 -- clear and replace whole text
