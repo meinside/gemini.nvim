@@ -2,7 +2,7 @@
 --
 -- Network module
 --
--- last update: 2024.08.21.
+-- last update: 2024.11.13.
 
 -- external dependencies
 local curl = require'plenary/curl'
@@ -25,12 +25,13 @@ local M = {}
 -- generate system instruction
 local function system_instruction(model)
   return string.format([====[
-You are a neovim plugin for generating things using Google Gemini API(model: %s).
+You are a neovim plugin for generating texts using Google Gemini API(model: %s).
 
 Current datetime is %s.
 
 Respond to user messages according to the following principles:
-- Do not repeat the user's request.
+- Do not repeat the user's request and return only the response to the user's request.
+- Unless otherwise specified, respond in the same language as used in the user's request.
 - Be as accurate as possible.
 - Be as truthful as possible.
 - Be as comprehensive and informative as possible.
