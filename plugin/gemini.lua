@@ -2,7 +2,7 @@
 --
 -- Gemini plugin for neovim
 --
--- last update: 2025.02.20.
+-- last update: 2025.02.24.
 
 local gemini = require("gemini")
 local config = require("gemini/config")
@@ -98,20 +98,21 @@ vim.api.nvim_create_user_command("GeminiGenerate", function(opts)
 	end
 end, { range = true, nargs = "?" })
 
--- :GeminiCommitLog
---   generate a nice commit log from the content of current file (eg. COMMIT_EDITMSG)
+-- :GeminiGenerateGitCommitLog
+--   generate a git commit log from the result of command: `git diff HEAD`
 --
--- :'<,'>GeminiCommitLog
---   replace selected range with generated content from the selected range as a prompt
+-- :'<,'>GeminiGenerateGitCommitLog
+--   replace selected range with generated git commit log from the selected range as a prompt
 --
-vim.api.nvim_create_user_command("GeminiCommitLog", function(opts)
-	debug("opts of command `GeminiCommitLog`: " .. vim.inspect(opts))
+vim.api.nvim_create_user_command("GeminiGenerateGitCommitLog", function(opts)
+	debug("opts of command `GeminiGenerateGitCommitLog`: " .. vim.inspect(opts))
 
-	local prompt = "Please generate a commit message adhering to the Conventional Commits v1.0.0 specification:\n\n"
+	local prompt =
+		"Please generate a nice git commit message adhering to the Conventional Commits v1.0.0 specification:\n\n"
 
 	-- generate texts with given prompt,
 	if opts.range == 0 then -- if there was no selected range,
-		local text = util.remove_comments(ui.whole_buffer_lines())
+		local text = util.execute_command("git diff HEAD")
 		local prompts = { prompt .. text }
 
 		debug("using prompt: " .. prompts[1])

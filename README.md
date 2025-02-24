@@ -79,28 +79,36 @@ Select a range of text with visual block, and run following command with a promp
 
 then it will generate a text from both the selected text and prompt, and replace the range with the generated one.
 
-### Commit Message Generation
+### Git Commit Message Generation
 
-#### Generate a Commit Message with Current Buffer
+#### Generate a Git Commit Message with Current Buffer
 
 Run following command:
 
 ```
-:GeminiCommitLog
+:GeminiGenerateGitCommitLog
 ```
 
-#### Replace Selected Range With Generated Commit Message
+then it will generate a commit message from the result of `git diff HEAD`,
+
+clear the current buffer, and insert the generated message.
+
+#### Replace Selected Range With Generated Git Commit Message
 
 Select a range of text with visual block, and run following command:
 
 ```
-:'<,'>GeminiCommitLog
+:'<,'>GeminiGenerateGitCommitLog
 ```
+
+then it will generate a commit message from the selected range,
+
+and replace the range with the generated one.
 
 ## Todos / Improvements
 
 - [X] Add screen recordings for text generation.
-- [ ] Add screen recordings for commit log generation.
+- [ ] Add screen recordings for git commit log generation.
 - [X] Strip unwanted markdown codeblock around the generated texts.
 - [ ] Add nice UIs for comparing & applying generated texts.
 - [X] Add an option for setting safety threshold.
