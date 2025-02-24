@@ -2,7 +2,7 @@
 --
 -- Utility functions module
 --
--- last update: 2025.02.20.
+-- last update: 2025.02.24.
 
 local M = {}
 
@@ -79,6 +79,12 @@ function M.strip_outermost_codeblock(str)
 		return M.join(M.subslice(lines, 2, #lines - 1), "\n")
 	end
 	return str
+end
+
+-- executes shell command and returns its output
+function M.execute_command(command)
+	local output = vim.fn.system(command)
+	return output
 end
 
 return M
