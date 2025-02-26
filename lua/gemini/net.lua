@@ -80,7 +80,9 @@ function M.request_content_generation(prompts)
 	end
 
 	if config.options.verbose then
-		vim.notify("requesting to endpoint: " .. endpoint)
+		vim.notify("Sending request to: " .. endpoint, vim.log.levels.DEBUG)
+	else
+		vim.notify("Genearting...", vim.log.levels.INFO)
 	end
 
 	local res = curl.post(request_url(endpoint, apiKey), {
@@ -92,10 +94,18 @@ function M.request_content_generation(prompts)
 	})
 
 	if res.status == 200 and res.exit == 0 then
+		if config.options.verbose then
+			vim.notify("Generated " .. string.len(res.body) .. " bytes.", vim.log.levels.DEBUG)
+		else
+			vim.notify("Generation finished.", vim.log.levels.INFO)
+		end
+
 		res = vim.json.decode(res.body)
 	else
 		if config.options.verbose then
-			vim.notify(vim.inspect(res))
+			vim.notify(vim.inspect(res), vim.log.levels.DEBUG)
+		else
+			vim.notify("Generation failed.", vim.log.levels.ERROR)
 		end
 
 		err = "request failed with http status: " .. res.status .. ", curl exit code: " .. res.exit
