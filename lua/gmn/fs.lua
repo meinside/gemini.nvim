@@ -1,14 +1,14 @@
--- lua/gemini/fs.lua
+-- lua/gmn/fs.lua
 --
 -- File module
 --
--- last update: 2025.02.20.
+-- last update: 2025.03.04.
 
 -- external dependencies
 local path = require("plenary/path")
 
 -- plugin modules
-local config = require("gemini/config")
+local config = require("gmn/config")
 
 local M = {}
 

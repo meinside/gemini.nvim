@@ -1,12 +1,12 @@
--- lua/gemini/config.lua
+-- lua/gmn/config.lua
 --
 -- Configuration module
 --
--- last update: 2025.02.20.
+-- last update: 2025.03.04.
 
 local M = {
 	-- constants
-	defaultConfigFilepath = "~/.config/gemini.nvim/config.json",
+	defaultConfigFilepath = "~/.config/gmn.nvim/config.json",
 	defaultTimeoutMsecs = 30 * 1000,
 	defaultModel = "gemini-2.0-flash",
 	defaultSafetyThreshold = "BLOCK_ONLY_HIGH",

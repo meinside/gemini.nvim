@@ -1,15 +1,15 @@
--- lua/gemini/net.lua
+-- lua/gmn/net.lua
 --
 -- Network module
 --
--- last update: 2025.02.20.
+-- last update: 2025.03.04.
 
 -- external dependencies
 local curl = require("plenary/curl")
 
 -- plugin modules
-local fs = require("gemini/fs")
-local config = require("gemini/config")
+local fs = require("gmn/fs")
+local config = require("gmn/config")
 
 -- constants
 local contentType = "application/json"
