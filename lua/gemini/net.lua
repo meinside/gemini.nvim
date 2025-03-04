@@ -82,7 +82,7 @@ function M.request_content_generation(prompts)
 	if config.options.verbose then
 		vim.notify("Sending request to: " .. endpoint, vim.log.levels.DEBUG)
 	else
-		vim.notify("Genearting...", vim.log.levels.INFO)
+		vim.notify("Generating...", vim.log.levels.INFO)
 	end
 
 	local res = curl.post(request_url(endpoint, apiKey), {
