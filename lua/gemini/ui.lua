@@ -2,7 +2,7 @@
 --
 -- UI module
 --
--- last update: 2025.02.20.
+-- last update: 2025.03.04.
 
 local M = {}
 
@@ -10,6 +10,12 @@ local M = {}
 function M.get_selection()
 	local start_row, start_col = unpack(vim.api.nvim_buf_get_mark(0, "<"))
 	local end_row, end_col = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+
+	-- NOTE: normalize the end column if it's set to v:maxcol
+	if end_col == vim.v.maxcol then
+		local line = vim.api.nvim_buf_get_lines(0, end_row - 1, end_row, false)[1]
+		end_col = #line
+	end
 
 	return start_row, start_col, end_row, end_col
 end
