@@ -1,4 +1,4 @@
--- lua/gemini/ui.lua
+-- lua/gmn/ui.lua
 --
 -- UI module
 --

@@ -1,10 +1,10 @@
--- lua/gemini.lua
+-- lua/gmn.lua
 --
--- last update: 2025.02.20.
+-- last update: 2025.03.04.
 
 -- plugin modules
-local config = require("gemini/config")
-local net = require("gemini/net")
+local config = require("gmn/config")
+local net = require("gmn/net")
 
 local M = {}
 

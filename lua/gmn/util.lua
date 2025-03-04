@@ -1,8 +1,8 @@
--- lua/gemini/util.lua
+-- lua/gmn/util.lua
 --
 -- Utility functions module
 --
--- last update: 2025.02.24.
+-- last update: 2025.03.04.
 
 local M = {}
 

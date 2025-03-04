@@ -1,13 +1,13 @@
--- plugin/gemini.lua
+-- plugin/gmn.lua
 --
 -- Gemini plugin for neovim
 --
--- last update: 2025.02.24.
+-- last update: 2025.03.04.
 
-local gemini = require("gemini")
-local config = require("gemini/config")
-local ui = require("gemini/ui")
-local util = require("gemini/util")
+local gmn = require("gmn")
+local config = require("gmn/config")
+local ui = require("gmn/ui")
+local util = require("gmn/util")
 
 local function error(msg)
 	vim.notify(msg, vim.log.levels.ERROR)
@@ -41,7 +41,7 @@ vim.api.nvim_create_user_command("GeminiGenerate", function(opts)
 			debug("using command parameter as a prompt: " .. opts.fargs[1])
 
 			-- do the generation
-			local parts, err = gemini.generate({ opts.fargs[1] })
+			local parts, err = gmn.generate({ opts.fargs[1] })
 			if err ~= nil then
 				error(err)
 			else
@@ -78,7 +78,7 @@ vim.api.nvim_create_user_command("GeminiGenerate", function(opts)
 		end
 
 		-- do the generation
-		local parts, err = gemini.generate(prompts)
+		local parts, err = gmn.generate(prompts)
 		if err ~= nil then
 			error(err)
 		else
@@ -118,7 +118,7 @@ vim.api.nvim_create_user_command("GeminiGenerateGitCommitLog", function(opts)
 		debug("using prompt: " .. prompts[1])
 
 		-- do the generation
-		local parts, err = gemini.generate(prompts)
+		local parts, err = gmn.generate(prompts)
 		if err ~= nil then
 			error(err)
 		else
@@ -148,7 +148,7 @@ vim.api.nvim_create_user_command("GeminiGenerateGitCommitLog", function(opts)
 		end
 
 		-- do the generation
-		local parts, err = gemini.generate(prompts)
+		local parts, err = gmn.generate(prompts)
 		if err ~= nil then
 			error(err)
 		else

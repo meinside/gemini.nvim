@@ -1,4 +1,4 @@
-# gemini.nvim
+# gmn.nvim
 
 A neovim plugin for generating texts using Google [Gemini APIs](https://ai.google.dev/tutorials/rest_quickstart).
 
@@ -9,10 +9,10 @@ A neovim plugin for generating texts using Google [Gemini APIs](https://ai.googl
 ```lua
 
   {
-    'meinside/gemini.nvim', config = function()
-      require'gemini'.setup {
+    'meinside/gmn.nvim', config = function()
+      require'gmn'.setup {
         -- (default values)
-        configFilepath = '~/.config/gemini.nvim/config.json',
+        configFilepath = '~/.config/gmn.nvim/config.json',
         timeout = 30 * 1000,
         model = 'gemini-2.0-flash',
         safetyThreshold = 'BLOCK_ONLY_HIGH',
@@ -29,7 +29,7 @@ A neovim plugin for generating texts using Google [Gemini APIs](https://ai.googl
 
 ## Configuration
 
-Get your API key from [here](https://makersuite.google.com/app/apikey)
+Get your Google AI API key from [here](https://makersuite.google.com/app/apikey)
 
 and create a JSON config file at path `configFilepath` with following content:
 
@@ -45,7 +45,7 @@ and create a JSON config file at path `configFilepath` with following content:
 
 #### Insert Generated Text At Current Cursor Position
 
-![gemini-nvim insert-with-prompt](https://github.com/meinside/gemini.nvim/assets/185988/f0575fe1-b40d-4962-9cec-f22818635767)
+![gmn-nvim insert-with-prompt](https://github.com/meinside/gmn.nvim/assets/185988/f0575fe1-b40d-4962-9cec-f22818635767)
 
 Run following command with a prompt:
 
@@ -57,7 +57,7 @@ It will generate a text from your prompt and insert it at the current cursor pos
 
 #### Generate Text With Selected Range As A Prompt
 
-![gemini-nvim replace](https://github.com/meinside/gemini.nvim/assets/185988/aeb5aee1-0078-4407-9acd-e9628b519420)
+![gmn-nvim replace](https://github.com/meinside/gmn.nvim/assets/185988/aeb5aee1-0078-4407-9acd-e9628b519420)
 
 Select a range of text with visual block, and run following command:
 
@@ -69,7 +69,7 @@ then it will generate a text from the selected text as a prompt, and replace the
 
 #### Replace Selected Range With Generated Text
 
-![gemini-nvim replace-with-prompt](https://github.com/meinside/gemini.nvim/assets/185988/831aa4f2-cfb9-4253-8cf6-e585b7617284)
+![gmn-nvim replace-with-prompt](https://github.com/meinside/gmn.nvim/assets/185988/831aa4f2-cfb9-4253-8cf6-e585b7617284)
 
 Select a range of text with visual block, and run following command with a prompt:
 
